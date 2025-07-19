@@ -1,1 +1,484 @@
-<p>student-registration works!</p>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h1 class="text-center mt-4">Student Registration Form</h1>
+      <!-- <h2 class="text-center mt-4">Admission Application Form For Self-Funding Intermediate Course</h2> -->
+      <hr>
+      <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()" class="row align-items-center gy-2 mb-5">
+         <h5 class="mt-5">1. Student Registration Details</h5>
+         <hr>
+         <!-- Full Name -->
+         <div class="col-md-4">
+            <mat-form-field appearance="outline" class="w-100">
+               <mat-label>Full Name</mat-label>
+               <input type="text" matInput formControlName="full_name">
+               <mat-error *ngIf="registrationForm.get('full_name')?.hasError('required')">
+                  Full Name is required
+               </mat-error>
+            </mat-form-field>
+         </div>
+         <!-- SSC Hall Ticket No -->
+         <div class="col-md-4">
+            <mat-form-field appearance="outline" class="w-100">
+               <mat-label>SSC Hall Ticket No</mat-label>
+               <input type="number" matInput formControlName="ssc_hall_ticket_no">
+               <mat-error *ngIf="registrationForm.get('ssc_hall_ticket_no')?.hasError('required')">
+                  SSC Hall Ticket No is required
+               </mat-error>
+            </mat-form-field>
+         </div>
+         <!-- Aadhaar Number -->
+         <div class="col-md-4">
+            <mat-form-field appearance="outline" class="w-100">
+               <mat-label>Aadhaar Number</mat-label>
+               <input type="number" matInput formControlName="aadhaar_number">
+               <mat-error *ngIf="registrationForm.get('aadhaar_number')?.hasError('required')">
+                  Aadhar Number is required
+               </mat-error>
+               <mat-error *ngIf="registrationForm.get('aadhaar_number')?.hasError('pattern')">
+                  Enter a valid 12-digit Aadhaar Number
+               </mat-error>
+            </mat-form-field>
+         </div>
+         <!-- SSC Pass year & Type -->
+         <div class="col-md-4">
+            <mat-form-field appearance="outline" class="w-100">
+               <mat-label>SSC Pass year & Type</mat-label>
+               <input type="number" matInput formControlName="ssc_pass_year">
+               <mat-error *ngIf="registrationForm.get('ssc_pass_year')?.hasError('required')">
+                  SSC Pass year is required
+               </mat-error>
+            </mat-form-field>
+         </div>
+         <!-- Email ID -->
+         <div class="col-md-4">
+            <mat-form-field appearance="outline" class="w-100">
+               <mat-label>E-mail ID</mat-label>
+               <input type="email" matInput formControlName="email_id">
+               <mat-error *ngIf="registrationForm.get('email_id')?.hasError('required')">
+                  E-mail ID is required
+               </mat-error>
+               <mat-error *ngIf="registrationForm.get('email_id')?.hasError('email')">
+                  Enter a valid email
+               </mat-error>
+            </mat-form-field>
+         </div>
+         <!-- Mobile Number -->
+         <div class="col-md-4">
+            <mat-form-field appearance="outline" class="w-100">
+               <mat-label>Mobile Number</mat-label>
+               <input type="number" matInput formControlName="mobile_no">
+               <mat-error *ngIf="registrationForm.get('mobile_no')?.hasError('required')">
+                  Mobile Number is required
+               </mat-error>
+               <mat-error *ngIf="registrationForm.get('mobile_no')?.hasError('pattern')">
+                  Enter a valid 10-digit phone number
+               </mat-error>
+            </mat-form-field>
+         </div>
+         <!-- Gender -->
+         <div class="col-md-4">
+            <mat-label>Gender: </mat-label>
+            <mat-radio-group formControlName="gender" class="radio-group">
+               <mat-radio-button value="Male" class="pe-3">Male</mat-radio-button>
+               <mat-radio-button value="Female" class="pe-3">Female</mat-radio-button>
+            </mat-radio-group>
+            <mat-error *ngIf="registrationForm.get('gender')?.hasError('required')">
+               Gender is required
+            </mat-error>
+         </div>
+         <!-- Age -->
+         <div class="col-md-4">
+            <mat-form-field appearance="outline" class="w-100">
+               <mat-label>Age</mat-label>
+               <input type="number" matInput formControlName="age">
+               <mat-error *ngIf="registrationForm.get('age')?.hasError('required')">
+                  Age is required
+               </mat-error>
+            </mat-form-field>
+         </div>
+         <!-- Date of Birth -->
+         <div class="col-md-4">
+            <mat-form-field appearance="outline" class="w-100">
+               <mat-label>Date of Birth</mat-label>
+               <input matInput [matDatepicker]="picker" formControlName="dob">
+               <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+               <mat-datepicker #picker></mat-datepicker>
+               <mat-error *ngIf="registrationForm.get('dob')?.hasError('required')">
+                  DOB is required
+               </mat-error>
+            </mat-form-field>
+         </div>
+         <!-- Mother Tongue -->
+         <div class="col-md-4">
+            <mat-form-field appearance="outline" class="w-100">
+               <mat-label>Mother Tongue</mat-label>
+               <input type="text" matInput formControlName="mother_tongue">
+               <mat-error *ngIf="registrationForm.get('mother_tongue')?.hasError('required')">
+               Mother Tongue is required
+               </mat-error>
+            </mat-form-field>
+         </div>
+         <!-- Languages -->
+         <div class="col-md-4 mb-4">
+            <label>II Language: </label>
+            <mat-radio-group formControlName="ll_language" class="radio-group">
+               <mat-radio-button value="Telugu" class="pe-3">Telugu</mat-radio-button>
+               <mat-radio-button value="Hindi" class="pe-3">Hindi</mat-radio-button>
+            </mat-radio-group>
+            <mat-error *ngIf="registrationForm.get('ll_language')?.hasError('required')">
+               II Language is required
+            </mat-error>
+         </div>
+         <!-- Religion -->
+         <div class="col-md-4">
+            <mat-form-field appearance="outline" class="w-100">
+               <mat-label>Religion</mat-label>
+               <input type="text" matInput formControlName="religion">
+               <mat-error *ngIf="registrationForm.get('religion')?.hasError('required')">
+                  Religion is required
+               </mat-error>
+            </mat-form-field>
+         </div>
+         <!-- Caste & Category -->
+         <div class="col-md-4">
+            <mat-form-field appearance="outline" class="w-100">
+               <mat-label>Caste & Category</mat-label>
+               <input type="text" matInput formControlName="caste_category">
+               <mat-error *ngIf="registrationForm.get('caste_category')?.hasError('required')">
+                  Caste & Category is required
+               </mat-error>
+            </mat-form-field>
+         </div>
+         <!-- Caste & Category -->
+         <div class="col-md-4">
+            <mat-form-field appearance="outline" class="w-100">
+               <mat-label>Identification Marks</mat-label>
+               <textarea matInput formControlName="identification_marks"></textarea>
+            </mat-form-field>
+         </div>
+         <!-- Extra Curicular Activities -->
+         <div class="col-md-4 mt-0">
+            <label>Extra Curicular Activities: </label>
+            <div formArrayName="extra_curicular_activities" class="checkbox-group d-inline">
+               <mat-checkbox *ngFor="let activity of extra_activity_List"
+                              (change)="onActivityChange(activity, $event.checked)" class="pe-4">
+                  {{ activity }}
+               </mat-checkbox>
+            </div>
+            <mat-error *ngIf="registrationForm.get('extra_curicular_activities')?.invalid && registrationForm.get('extra_curicular_activities')?.touched">
+               Select at least one Activity
+            </mat-error>
+         </div>
+         
+         <h5 class="mt-5">2. Parent Details</h5>
+         <hr>
+         <!-- Father Name -->
+         <div class="col-md-4">
+            <mat-form-field appearance="outline" class="w-100">
+               <mat-label>Father Name</mat-label>
+               <input type="text" matInput formControlName="father_name">
+               <mat-error *ngIf="registrationForm.get('father_name')?.hasError('required')">
+                  Father Name is required
+               </mat-error>
+            </mat-form-field>
+         </div>
+         <!-- Father Aadhaar Number -->
+         <div class="col-md-4">
+            <mat-form-field appearance="outline" class="w-100">
+               <mat-label>Father Aadhaar Number</mat-label>
+               <input type="number" matInput formControlName="father_aadhaar_no">
+               <mat-error *ngIf="registrationForm.get('father_aadhaar_no')?.hasError('required')">
+                  Father Aadhar Number is required
+               </mat-error>
+            </mat-form-field>
+         </div>
+         <!-- Mother Name -->
+         <div class="col-md-4">
+            <mat-form-field appearance="outline" class="w-100">
+               <mat-label>Mother Name</mat-label>
+               <input type="text" matInput formControlName="mother_name">
+               <mat-error *ngIf="registrationForm.get('mother_name')?.hasError('required')">
+                  Mother Name is required
+               </mat-error>
+            </mat-form-field>
+         </div>
+         <!-- Mother Aadhaar Number -->
+         <div class="col-md-4">
+            <mat-form-field appearance="outline" class="w-100">
+               <mat-label>Mother Aadhaar Number</mat-label>
+               <input type="number" matInput formControlName="mother_aadhaar_no">
+               <mat-error *ngIf="registrationForm.get('mother_aadhaar_no')?.hasError('required')">
+                  Mother Aadhar Number is required
+               </mat-error>
+            </mat-form-field>
+         </div>
+         <!-- Guardian Name -->
+         <div class="col-md-4">
+            <mat-form-field appearance="outline" class="w-100">
+               <mat-label>Guardian Name</mat-label>
+               <input type="text" matInput formControlName="guardian_name">
+               <mat-error *ngIf="registrationForm.get('guardian_name')?.hasError('required')">
+                  Guardian Name is required
+               </mat-error>
+            </mat-form-field>
+         </div>
+         <!-- Guardian Aadhaar Number -->
+         <div class="col-md-4">
+            <mat-form-field appearance="outline" class="w-100">
+               <mat-label>Guardian Aadhaar Number</mat-label>
+               <input type="number" matInput formControlName="guardian_aadhaar_no">
+               <mat-error *ngIf="registrationForm.get('guardian_aadhaar_no')?.hasError('required')">
+                  Guardian Aadhar Number is required
+               </mat-error>
+            </mat-form-field>
+         </div>
+         <!-- Father Occupation -->
+         <div class="col-md-4">
+            <mat-form-field appearance="outline" class="w-100">
+               <mat-label>Father Occupation</mat-label>
+               <input type="number" matInput formControlName="father_occupation">
+               <mat-error *ngIf="registrationForm.get('father_occupation')?.hasError('required')">
+                  Father Occupation is required
+               </mat-error>
+            </mat-form-field>
+         </div>
+         <!-- Annual Income -->
+         <div class="col-md-4">
+            <mat-form-field appearance="outline" class="w-100">
+               <mat-label>Annual Income</mat-label>
+               <input type="number" matInput formControlName="annual_income">
+               <mat-error *ngIf="registrationForm.get('annual_income')?.hasError('required')">
+                  Annual Income is required
+               </mat-error>
+            </mat-form-field>
+         </div>
+         <!-- Parent Mobile Number -->
+         <div class="col-md-4">
+            <mat-form-field appearance="outline" class="w-100">
+               <mat-label>Parent Mobile Number</mat-label>
+               <input type="number" matInput formControlName="parent_mobile_no">
+               <mat-error *ngIf="registrationForm.get('parent_mobile_no')?.hasError('required')">
+                  Parent Mobile Number is required
+               </mat-error>
+            </mat-form-field>
+         </div>
+         <h5 class="mt-5">3. Address For Communication</h5>
+         <hr>
+         <!-- Door Number -->
+         <div class="col-md-4">
+            <mat-form-field appearance="outline" class="w-100">
+               <mat-label>Door Number</mat-label>
+               <input type="text" matInput formControlName="door_number">
+               <mat-error *ngIf="registrationForm.get('door_number')?.hasError('required')">
+                  Door Number is required
+               </mat-error>
+            </mat-form-field>
+         </div>
+         <!-- Street Name -->
+         <div class="col-md-4">
+            <mat-form-field appearance="outline" class="w-100">
+               <mat-label>Street Name</mat-label>
+               <input type="text" matInput formControlName="street_name">
+               <mat-error *ngIf="registrationForm.get('street_name')?.hasError('required')">
+                  Street Name is required
+               </mat-error>
+            </mat-form-field>
+         </div>
+         <!-- Village -->
+         <div class="col-md-4">
+            <mat-form-field appearance="outline" class="w-100">
+               <mat-label>Village</mat-label>
+               <input type="text" matInput formControlName="village">
+               <mat-error *ngIf="registrationForm.get('village')?.hasError('required')">
+                  Village is required
+               </mat-error>
+            </mat-form-field>
+         </div>
+         <!-- Mandal -->
+         <div class="col-md-4">
+            <mat-form-field appearance="outline" class="w-100">
+               <mat-label>Mandal</mat-label>
+               <input type="text" matInput formControlName="mandal">
+               <mat-error *ngIf="registrationForm.get('mandal')?.hasError('required')">
+                  Mandal is required
+               </mat-error>
+            </mat-form-field>
+         </div>
+         <!-- State -->
+         <div class="col-md-4">
+            <mat-form-field appearance="outline" class="w-100">
+               <mat-label>State</mat-label>
+               <input type="text" matInput formControlName="state">
+               <mat-error *ngIf="registrationForm.get('state')?.hasError('required')">
+                  State is required
+               </mat-error>
+            </mat-form-field>
+         </div>
+         <!-- Pin Code -->
+         <div class="col-md-4">
+            <mat-form-field appearance="outline" class="w-100">
+               <mat-label>Pin Code</mat-label>
+               <input type="number" matInput formControlName="pincode">
+               <mat-error *ngIf="registrationForm.get('pincode')?.hasError('required')">
+                  Pin Code is required
+               </mat-error>
+            </mat-form-field>
+         </div>
+         <h5 class="mt-5">4. Previous Accademic Details</h5>
+         <hr>
+         <!-- School/College -->
+         <div class="col-md-4">
+            <mat-form-field appearance="outline" class="w-100">
+               <mat-label>School/College</mat-label>
+               <input type="text" matInput formControlName="school_college">
+               <mat-error *ngIf="registrationForm.get('school_college')?.hasError('required')">
+                  School/College is required
+               </mat-error>
+            </mat-form-field>
+         </div>
+         <!-- GPA -->
+         <div class="col-md-8">
+            <div class="row justify-content-center align-items-center">
+               <div class="col-md-1 col-sm-6 mb-3">
+                  <mat-label>GPA: </mat-label>
+               </div>
+               <!-- English -->
+               <div class="col-md-2 col-6">
+                  <mat-form-field appearance="outline" class="w-100">
+                     <mat-label>English</mat-label>
+                     <input type="number" matInput formControlName="english_gpa">
+                     <mat-error *ngIf="registrationForm.get('english_gpa')?.hasError('required')">
+                        English is required
+                     </mat-error>
+                  </mat-form-field>
+               </div>
+               <!-- Maths -->
+               <div class="col-md-3 col-6">
+                  <mat-form-field appearance="outline" class="w-100">
+                     <mat-label>Maths</mat-label>
+                     <input type="number" matInput formControlName="maths_gpa">
+                     <mat-error *ngIf="registrationForm.get('maths_gpa')?.hasError('required')">
+                        Maths is required
+                     </mat-error>
+                  </mat-form-field>
+               </div>
+               <!-- General Science -->
+               <div class="col-md-3 col-6">
+                  <mat-form-field appearance="outline" class="w-100">
+                     <mat-label>General Science</mat-label>
+                     <input type="number" matInput formControlName="general_science_gpa">
+                     <mat-error *ngIf="registrationForm.get('general_science_gpa')?.hasError('required')">
+                        General Science is required
+                     </mat-error>
+                  </mat-form-field>
+               </div>
+               <!-- Social Studies -->
+               <div class="col-md-3 col-6">
+                  <mat-form-field appearance="outline" class="w-100 me-2">
+                     <mat-label>Social Studies</mat-label>
+                     <input type="number" matInput formControlName="social_studies_gpa">
+                     <mat-error *ngIf="registrationForm.get('social_studies_gpa')?.hasError('required')">
+                        Social Studies is required
+                     </mat-error>
+                  </mat-form-field>
+               </div>
+               
+            </div>
+         </div>
+         <!-- Total Marks/Grade -->
+         <div class="col-md-2">
+            <mat-form-field appearance="outline" class="w-100 me-2">
+               <mat-label>Total Marks/Grade</mat-label>
+               <input type="number" matInput formControlName="total_marks_grade">
+               <mat-error *ngIf="registrationForm.get('total_marks_grade')?.hasError('required')">
+                  Total Marks/Grade is required
+               </mat-error>
+            </mat-form-field>
+         </div>
+         <!-- Percentage / GPA -->
+         <div class="col-md-2">
+            <!-- Total Marks/Grade -->
+            <mat-form-field appearance="outline" class="w-100 me-2">
+               <mat-label>Percentage / GPA</mat-label>
+               <input type="number" matInput formControlName="perc_gpa">
+               <mat-error *ngIf="registrationForm.get('perc_gpa')?.hasError('required')">
+                  Percentage / GPA is required
+               </mat-error>
+            </mat-form-field>
+         </div>
+         <!-- Year of Pass -->
+         <div class="col-md-2">
+            <mat-form-field appearance="outline" class="w-100 me-2">
+               <mat-label>Year of Pass</mat-label>
+               <input type="number" matInput formControlName="year_of_pass">
+               <mat-error *ngIf="registrationForm.get('year_of_pass')?.hasError('required')">
+                  Year of Pass is required
+               </mat-error>
+            </mat-form-field>
+         </div>
+         <!-- Pass Type -->
+         <div class="col-md-6 mb-4">
+            <label>Pass Type: </label>
+            <mat-radio-group formControlName="pass_type" class="radio-group">
+               <mat-radio-button value="Regular" class="pe-3">Regular</mat-radio-button>
+               <mat-radio-button value="Compartmental" class="pe-3">Compartmental</mat-radio-button>
+               <mat-radio-button value="Open School" class="pe-3">Open School</mat-radio-button>
+            </mat-radio-group>
+            <mat-error *ngIf="registrationForm.get('pass_type')?.hasError('required')">
+               Pass Type is required
+            </mat-error>
+         </div>
+         <!-- Board Name -->
+         <div class="col-md-4 mb-4">
+            <label>Board Name: </label>
+            <mat-radio-group formControlName="board_name" class="radio-group">
+               <mat-radio-button value="SSC" class="pe-3">SSC</mat-radio-button>
+               <mat-radio-button value="CBSE" class="pe-3">CBSE</mat-radio-button>
+            </mat-radio-group>
+            <mat-error *ngIf="registrationForm.get('board_name')?.hasError('required')">
+               Board Name is required
+            </mat-error>
+         </div>
+         <!-- Hall Ticket Number -->
+         <div class="col-md-4">
+            <mat-form-field appearance="outline" class="w-100">
+               <mat-label>Hall Ticket Number</mat-label>
+               <input type="number" matInput formControlName="hall_ticket_no">
+               <mat-error *ngIf="registrationForm.get('hall_ticket_no')?.hasError('required')">
+                  Hall Ticket Number is required
+               </mat-error>
+            </mat-form-field>
+         </div>
+         <!-- Place of Study -->
+         <div class="col-md-4">
+            <mat-form-field appearance="outline" class="w-100">
+               <mat-label>Place of Study</mat-label>
+               <input type="text" matInput formControlName="place_of_study">
+               <mat-error *ngIf="registrationForm.get('place_of_study')?.hasError('required')">
+                  Place of Study is required
+               </mat-error>
+            </mat-form-field>
+         </div>
+         <!-- <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Course</mat-label>
+            <mat-select formControlName="course">
+            <mat-option *ngFor="let course of courses" [value]="course">{{ course }}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="registrationForm.get('course')?.hasError('required')">
+            Course selection is required
+            </mat-error>
+         </mat-form-field> -->
+         <!-- <div class="d-flex justify-content-center">
+            <button type="submit" class="btn btn-primary">Register</button>
+            <button type="button" class="btn btn-warning">Clear</button>
+         </div> -->
+         <hr>
+         <div class="d-flex justify-content-evenly mt-4">
+            <button mat-raised-button color="primary" type="submit">Register</button>
+            <button mat-raised-button color="warn" type="reset">Clear</button>
+         </div>
+      </form>
+    </div>
+  </div>
+</div>
